@@ -1,0 +1,78 @@
+/* Styling for Alchemy News Network, which overrides default bootstrap styling. 
+
+Note: As a developer for IBM, I wouldn't actually use bootstrap for CSS. I would develop my own front-end component library to use as needed. This is just for quick development.
+
+Using component frameworks is convenient but it loads web apps with a lot of unused code. It's best to only use the components that are actually needed.
+
+What I'd like to do is use something like Polymer to build custom reuseable components, which greatly speed up development time.
+
+*/
+
+body {
+	background-color: #607D8B;
+	font-family: 'Hind', sans-serif;
+	color: #FFFFFF;
+}
+
+.main-container {
+	margin-top: 10vh;
+}
+
+.headline {
+	color: #00D49E;
+	font-size: 50px;
+}
+
+.glyphicon-globe {
+	color: #FF5722;
+	font-size: 55px;
+}
+
+.well.catchphrase {
+	background-color: inherit;
+	color: inherit;
+}
+
+#panel-header {
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+/* Form elements display as block by default. */
+.form-control {
+	display: inline-block;
+	width:	auto;
+}
+
+form.invalid input,
+form.invalid select {
+	border: 1px solid #FF5722;
+} 
+/* Override default Bootstrap colors with Material Design. https://www.materialpalette.com */
+.btn {
+	background-color: #FF5722;
+}
+
+.well {
+	color: #212121;
+}
+
+/* Add additional spacing in between panel header elements. CSS Flexboxes handles between element spacing better, but because we're using Bootstrap here, it's best to just use that. */
+.panel-item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.hidden {
+	display: none;
+}
+
+#show-json {
+	max-height: 30vw;
+	overflow-x: scroll;
+}
+
+#no-results,
+#one-result {
+	font-size: 30px;
+	font-color: #727272;
+}

@@ -1,0 +1,117 @@
+<!-- By Zhila Emadi, candidate for Application Developer position, AlchemyAPI. 
+Project prompt:
+
+We’re looking for a dashboard to help us understand our online community. Use the Twitter and StackOverflow APIs in combination with our services to give us a picture of how people are talking about AlchemyAPI. Build an intuitive, simple webpage that uses NLP to provide insights rather than simply aggregating data.
+
+Feel free to use as many other APIs and libraries as you wish, but we are interested in content from StackOverflow and Twitter.
+
+Notes from Zhila:
+I chose not to use the Twitter API because it requires a backend for authorization and authentication. It requires the use of encoding credentials, OAuth, SSL, etc. For a simple project, this just wasn't feasible. Because I didn't create a backend, the only way I could use AlchemyAPI with a front-end project was to expose my API key.
+
+
+Time spent on this project: 8 hours total. 
+2 hours: coming up with an idea, familiarizing myself with the Alchemy and Stack Overflow APIs and scoping out the feasibility of using Twitter.
+2 hours: Testing out different layouts and creating an HTML structure.
+4 hours: Writing out JavaScript, making modifications, commenting and cleaning up code.
+
+HOW THE APP WORKS:
+
+This app allows users to search for sentiment and content analysis on topics of their choice from Stack Overflow and the Alchemy News API.
+A) Users select either tech users or the media, a verb that describes the analysis they're looking for, and type in a subject. In this case, they can choose between 'feeling' (sentiment) or 'talking' (keywords). They then choose how many days ago they want to look back.
+
+B) In the background, the app pulls data based on what the user has entered.
+	If the user selected 'feeling', a sentiment analysis is run. 
+	If the user selected 'talking', a content analysis is run. 
+	
+	If a media/blogger is selected, data is pulled from only one source, the News Api. 
+	If user is selected, questions on their subject of choice is pulled from Stack Overflow and then sent to the Language Api.
+
+C) I ran out of time to finish multiple tables. Stack Overflow's keyword analysis is pulled into a table, and all other sources return pretty-printed JSON.
+
+FINAL THOUGHTS:
+I had a tough time with this assignment. Not from a technical standpoint, but because I used several data sources I wasn't familiar with and wasn't working within my normal development infrastructure. 
+
+This really isn't reflective of my coding skill, so feel free to ask some questions. Thanks for reviewing this project!
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alchemy News Network</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../alchemy-news-network/static/css/style.css">
+	<link rel='shortcut icon' href='../alchemy-news-network/static/img/favicon.ico' type='image/x-icon'/ >
+
+
+	<!-- Latest compiled and minified jQuery -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid main-container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1 class="headline"><span class="glyphicon glyphicon-globe"></span>Alchemy News Network</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 well text-center col-md-offset-1 catchphrase">
+				<form>
+				<h2><div>Keep track of your tech community here.</div>
+					<div class="panel-group text-center" id="panel-header">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<span class="panel-item">How are </span>
+								<select id="noun-select" class="form-control form-inline panel-item" required>
+									<option data-toggle="tooltip" data-placement="left" title="People who typically need help with using AlchemyAPI." value="users">users</option>
+									<option data-toggle="tooltip" data-placement="left" title="People and organizations who influence perceptions of AlchemyAPI." value="media">the media and bloggers</option>
+								</select>
+								<select id="verb-select" class="form-control form-inline panel-item" required>
+									<option value="sentiment">feeling about</option>
+									<option value="keywords">talking about</option>
+								</select>
+								<input type="text" id="subject-input" class="form-control form-inline panel-item" placeholder="Subject. e.g.: AlchemyAPI" required>
+								</input>
+								<span class="panel-item">in the past</span>
+								<select id="time-select" class="form-control form-inline panel-item" required>
+									<option value="1">day</option>
+									<option value="7">week</option>
+									<option value="30">30 days</option>
+									<option value="60">60 days</option>
+								</select>
+								<span class="panel-item">?</span>
+								<button class="btn panel-item submit" data-toggle="collapse" data-parent="#panel-header" type="button">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<div class="row">
+				<div id="panel-accordion" class="col-md-10 col-md-offset-1 hidden">
+				</div>
+			</div>
+			<div id="accordion-reset" class="hidden">
+				<div class="panel-body well">
+					<div id="no-results" class="hidden text-center">No results found from query. </div>
+					<div id="api-limit" class="hidden text-center">Api limits exceeded. </div>
+					<div id="show-json" class="hidden text-center"></div>
+					<table id="analysis-table" class="table hidden">
+						<caption>Analysis of Stack Overflow AlchemyAPI Users</caption>
+						<thead>
+							<tr>
+								<th>Keywords</th>
+								<th>Relevance</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>				
+				</div>
+			</div>
+			<script type="text/javascript" src="../alchemy-news-network/static/js/alchemy.js"></script>
+		</body>
+		</html>

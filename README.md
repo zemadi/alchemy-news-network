@@ -31,7 +31,7 @@ If user is selected, questions on their subject of choice is pulled from Stack O
 **C)** I ran out of time to finish multiple tables. Stack Overflow's keyword analysis is pulled into a table, and all other sources return pretty-printed JSON.
 
 FINAL THOUGHTS:
-I had a tough time with this assignment. Not from a technical standpoint, but because I used several data sources I wasn't familiar with and wasn't working within my normal development infrastructure. 
+I had a tough time with this assignment. Not from a technical standpoint, but because I used several data sources I wasn't familiar with and wasn't working within my normal development infrastructure. Ther were also a lot of issues with exceeding api limits. But the queries do go through occassionally. Here's an example: https://drive.google.com/file/d/0B4_aZ_Hgs9XedXRibW1sWlFFT2M/view
 
 This really isn't reflective of my coding skill, so feel free to ask some questions. 
 **Thanks for reviewing this project!**

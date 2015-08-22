@@ -1,4 +1,3 @@
-## By Zhila Emadi, candidate for Application Developer position, AlchemyAPI. 
 **Project prompt:**
 
 We’re looking for a dashboard to help us understand our online community. Use the Twitter and StackOverflow APIs in combination with our services to give us a picture of how people are talking about AlchemyAPI. Build an intuitive, simple webpage that uses NLP to provide insights rather than simply aggregating data.

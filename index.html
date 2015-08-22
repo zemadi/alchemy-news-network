@@ -5,19 +5,31 @@ We’re looking for a dashboard to help us understand our online community. Use 
 
 Feel free to use as many other APIs and libraries as you wish, but we are interested in content from StackOverflow and Twitter.
 
-Focus on a reusable, adaptable solution, so we can share this project with other interested users.
-There are no limits on what programming languages you can use to create the dashboard.
-
 Notes from Zhila:
 I chose not to use the Twitter API because it requires a backend for authorization and authentication. It requires the use of encoding credentials, OAuth, SSL, etc. For a simple project, this just wasn't feasible. Because I didn't create a backend, the only way I could use AlchemyAPI with a front-end project was to expose my API key.
 
-Time spent on this project: 8 hours total. 
+
+Time spent on this project: 11 hours total. 
 2 hours: coming up with an idea, familiarizing myself with the Alchemy and Stack Overflow APIs and scoping out the feasibility of using Twitter.
-2 hours: Testing out different layours and creating a simple HTML structure.
-2 hours: Writing out JavaScript and cleaning up code.
+2 hours: Testing out different layouts and creating an HTML structure.
+4 hours: Writing out JavaScript, making modifications, commenting and cleaning up code.
 
-Add a description of the project HERE.
+HOW THE APP WORKS:
+A) Users select either tech users or the media, then a verb that describes the analysis they're looking for. In this case, they can choose between 'feeling' (sentiment) or 'talking' (keywords). They then choose how many days ago they want to look back.
 
+B) In the background, the app pulls data based on what the user has entered.
+	If the user selected 'feeling', a sentiment analysis is run. 
+	If the user selected 'talking', a content analysis is run. 
+	
+	If a media/blogger is selected, data is pulled from only one source, the News Api. 
+	If user is selected, questions on AlchemyApi is pulled from Stack Overflow and then sent to the Language Api.
+
+C) I ran out of time to finish multiple tables. Stack Overflow's keyword analysis is pulled into a table, and all other sources return pretty-printed JSON.
+
+FINAL THOUGHTS:
+I had a tough time with this assignment. Not from a technical standpoint, but because I used several data sources I wasn't familiar with and wasn't working within my normal development infrastructure. 
+
+This really isn't reflective of my coding skill, so feel free to ask some questions. Thanks for reviewing this project!
 -->
 
 <!DOCTYPE html>
@@ -34,7 +46,6 @@ Add a description of the project HERE.
 
 	<!-- Latest compiled and minified jQuery -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -45,45 +56,55 @@ Add a description of the project HERE.
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 well text-center col-md-offset-2">
+			<div class="col-md-8 well text-center col-md-offset-2 catchphrase">
 				<h2><div>Keep track of the AlchemyAPI community here.</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-8 text-center col-md-offset-2">
-				<div class="text-center">
-					<div class="panel-group" id="panel-473214">
+					<div class="panel-group text-center" id="panel-header">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<span class="panel-item">How are </span>
 								<select id="noun-select" class="form-control form-inline panel-item">
-								  <option data-toggle="tooltip" data-placement="left" title="People who typically need help with using AlchemyAPI." value="users">users</option>
-								  <option data-toggle="tooltip" data-placement="left" title="People and organizations who influence perceptions of AlchemyAPI." value="media">the media and bloggers</option>
+									<option data-toggle="tooltip" data-placement="left" title="People who typically need help with using AlchemyAPI." value="users">users</option>
+									<option data-toggle="tooltip" data-placement="left" title="People and organizations who influence perceptions of AlchemyAPI." value="media">the media and bloggers</option>
 								</select>
 								<select id="verb-select" class="form-control form-inline panel-item">
-								  <option value="sentiment">feeling about</option>
-								  <option value="keywords">talking about</option>
+									<option value="sentiment">feeling about</option>
+									<option value="keywords">talking about</option>
 								</select>
 								<span class="panel-item">AlchemyAPI in the past</span>
 								<select id="time-select" class="form-control form-inline panel-item">
-								  <option value="1">day</option>
-								  <option value="2">two days</option>
-								  <option value="7">week</option>
+									<option value="1">day</option>
+									<option value="7">week</option>
+									<option value="30">30 days</option>
+									<option value="60">60 days</option>
 								</select>
 								<span class="panel-item">?</span>
-								<button class="btn panel-item submit" data-toggle="collapse" data-parent="#panel-473214" href="#panel-element-991629">Submit</button>
+								<button class="btn panel-item submit" data-toggle="collapse" data-parent="#panel-header">Submit</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="panel-element-991629" class="panel-collapse collapse col-md-10">
-				<div class="panel-body">
-					Anim pariatur cliche...
+			<div class="row">
+				<div id="panel-accordion" class="col-md-10 col-md-offset-1 hidden">
 				</div>
 			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="../alchemy-news-network/static/js/alchemy.js"></script>
-</body>
-</html>
+			<div id="accordion-reset" class="hidden">
+				<div class="panel-body well">
+					<div id="no-results" class="hidden text-center">No results found from query. </div>
+					<div id="show-json" class="hidden text-center"></div>
+					<table id="analysis-table" class="table hidden">
+						<caption>Analysis of Stack Overflow AlchemyAPI Users</caption>
+						<thead>
+							<tr>
+								<th>Keywords</th>
+								<th>Relevance</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>				
+				</div>
+			</div>
+			<script type="text/javascript" src="../alchemy-news-network/static/js/alchemy.js"></script>
+		</body>
+		</html>

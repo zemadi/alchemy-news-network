@@ -9,7 +9,19 @@ What I'd like to do is use something like Polymer to build custom reuseable comp
 */
 
 body {
+	background-color: #607D8B;
 	font-family: 'Hind', sans-serif;
+	color: #FFFFFF;
+}
+
+.well.catchphrase {
+	background-color: inherit;
+	color: inherit;
+}
+
+#panel-header {
+	font-size: 14px;
+	margin-top: 20px;
 }
 
 /* Form elements display as block by default. */
@@ -18,7 +30,31 @@ body {
 	width:	auto;
 }
 
+/* Override default Bootstrap colors with Material Design. https://www.materialpalette.com */
+.btn {
+	background-color: #FF5722;
+}
+
+.well {
+	color: #212121;
+}
+
 /* Add additional spacing in between panel header elements. CSS Flexboxes handles between element spacing better, but because we're using Bootstrap here, it's best to just use that. */
 .panel-item:not(:last-child) {
     margin-right: 10px;
+}
+
+.hidden {
+	display: none;
+}
+
+#show-json {
+	max-height: 30vw;
+	overflow-x: scroll;
+}
+
+#no-results,
+#one-result {
+	font-size: 30px;
+	font-color: #727272;
 }

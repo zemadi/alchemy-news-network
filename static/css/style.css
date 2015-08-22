@@ -1,0 +1,24 @@
+/* Styling for Alchemy News Network, which overrides default bootstrap styling. 
+
+Note: As a developer for IBM, I wouldn't actually use bootstrap for CSS. I would develop my own front-end component library to use as needed. This is just for quick development.
+
+Using component frameworks is convenient but it loads web apps with a lot of unused code. It's best to only use the components that are actually needed.
+
+What I'd like to do is use something like Polymer to build custom reuseable components, which greatly speed up development time.
+
+*/
+
+body {
+	font-family: 'Hind', sans-serif;
+}
+
+/* Form elements display as block by default. */
+.form-control {
+	display: inline-block;
+	width:	auto;
+}
+
+/* Add additional spacing in between panel header elements. CSS Flexboxes handles between element spacing better, but because we're using Bootstrap here, it's best to just use that. */
+.panel-item:not(:last-child) {
+    margin-right: 10px;
+}
